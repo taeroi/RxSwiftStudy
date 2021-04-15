@@ -32,9 +32,24 @@ let animals = ["🐶", "🐱", "🐹", "🐰", "🦊", "🐻", "🐯"]
 let fruits = ["🍎", "🍐", "🍋", "🍇", "🍈", "🍓", "🍑"]
 var flag = true
 
+// 특정 조건에 따라 Observable을 생성할 수 있음
 
+let factory = Observable<String>.deferred{ //타입지정이 필요함
+    
+    if flag {
+        return Observable.from(animals)
+    } else {
+        return Observable.from(fruits)
+    }
+}
 
+factory
+    .subscribe{print($0)}
+    .disposed(by: disposeBag)
 
+factory
+    .subscribe{print($0)}
+    .disposed(by: disposeBag)
 
 
 

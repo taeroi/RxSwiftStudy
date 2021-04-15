@@ -29,6 +29,9 @@ import RxSwift
 
 let disposeBag = DisposeBag()
 
+// 첫 번째 파라미터에는 시작할 정수를 입력(반드시 정수를 전달해야함)
+// 두 번째 파라미터에는 개수를 입력
+//range 연산자는 1씩 증가하는 sequence를 가진다.
 Observable.range(start: 1, count: 10)
    .subscribe { print($0) }
    .disposed(by: disposeBag)

@@ -30,7 +30,14 @@ import RxSwift
 let disposeBag = DisposeBag()
 let element = "❤️"
 
+// 동일한 요소를 반복적으로 방출
+// 파라미터로 받은 element를 반복적으로 방출
+// 무한루프이므로 범위를 정해주는 것이 매우 중요
 
+Observable.repeatElement(element)
+    .take(7)    //take연산자를 통해서 범위를 정한다
+    .subscribe{print($0)}
+    .disposed(by: disposeBag)
 
 
 

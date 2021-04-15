@@ -33,6 +33,12 @@ enum MyError: Error {
    case error
 }
 
+//error 이벤트를 전달하고 종료하는 observable을 생성
+//주로 error를 처리할 때 사용된다
+
+Observable<Void>.error(MyError.error)
+    .subscribe{(print($0))}
+    .disposed(by: disposeBag)
 
 
 

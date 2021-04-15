@@ -29,9 +29,13 @@ import RxSwift
 
 let disposeBag = DisposeBag()
 
+//empty, error 연산자 모두 어떠한 요소도 방출하지 않음(next 이벤트를 전달하지 않는다)
 
+Observable<Void>.empty()
+    .subscribe{print($0)}
+    .disposed(by: disposeBag)
 
-
+//결과를 보면 completed만 출력됨
 
 
 

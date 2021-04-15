@@ -33,7 +33,33 @@ enum MyError: Error {
    case error
 }
 
+// 앞서 공부한 연산자는 parameters를 방출하고 completed가 전달되면 중지됨
+// Observable이 동작하는 방식을 직접 구현하고자 할 때는 create연산자를 사용하면 됨
 
+Observable<String>.create{ (observer) -> Disposable in
+    guard let url = URL(string:"https://www.apple.com")
+    else {
+        observer.onError(MyError.error)
+        return Disposables.create()
+        //여기서 Disposable이 아닌 Disposables로 사용해야 함을 꼭 기억
+    }
+    
+    guard let html = try? String(contentsOf: url, encoding: .utf8)
+    else {
+        observer.onError(MyError.error)
+        return Disposables.create()
+    }
+    //요소를 방출할 때는 onNext 메소드를 사용하고 파라미터로 방출할 요소를 선택
+    observer.onNext(html)
+    
+    //종료시키기 위해서는 completed나 error 이벤트를 호출해야한다
+    //so, onNext를 통해 파라미터를 구독자에게 전달하고자 할 때는 completd나 error 이벤트가 발생하기 전에 호출해야 한다
+    observer.onCompleted()
+    
+    return Disposables.create()
+}
+.subscribe{print($0)}
+.disposed(by: disposeBag)
 
 
 

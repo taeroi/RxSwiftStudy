@@ -35,16 +35,3 @@ Observable.from(fruits)
    .disposed(by: disposeBag)
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-

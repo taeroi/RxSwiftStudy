@@ -30,6 +30,10 @@ import RxSwift
 let disposeBag = DisposeBag()
 let element = "😀"
 
+// 1개의 항목을 방출하는 Observable을 생성한다
+// 1개의 element를 파라미터로 받아서 Observable을 리턴한다
+
+//from 연산자와 조금 헷갈릴 수도 있는데 just연산자는 파라미터를 그대로 방출한다
 Observable.just(element)
    .subscribe { event in print(event) }
    .disposed(by: disposeBag)
@@ -37,17 +41,4 @@ Observable.just(element)
 Observable.just([1, 2, 3])
    .subscribe { event in print(event) }
    .disposed(by: disposeBag)
-
-
-
-
-
-
-
-
-
-
-
-
-
 
