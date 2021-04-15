@@ -30,6 +30,11 @@ import RxSwift
 let disposeBag = DisposeBag()
 let numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
+//Observable이 방출하는 요소를 filter연산자에서 만든 조건에 따라 필터링한다
 
+Observable.from(numbers)
+    .filter{$0.isMultiple(of: 2)}
+    .subscribe{print($0)}
+    .disposed(by: disposeBag)
 
 

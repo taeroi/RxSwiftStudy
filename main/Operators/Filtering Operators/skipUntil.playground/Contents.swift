@@ -29,3 +29,18 @@ import RxSwift
 
 let disposeBag = DisposeBag()
 
+//Observable을 파라미터로 받는다, 파라미터를 trigger라고 부른다
+let subject = PublishSubject<Int>()
+let trigger = PublishSubject<Int>()
+
+subject.skipUntil(trigger)
+    .subscribe{print($0)}
+    .disposed(by: disposeBag)
+
+//아직 trigger가 방출한 요소가 없기 때문에 구독자로 전달되지 않는다
+subject.onNext(1)
+
+trigger.onNext(0)
+
+//트리거가 next이벤트를 실행시킨 후에 subject의 next이벤트가 전달된다
+subject.onNext(2)

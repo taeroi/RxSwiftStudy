@@ -30,8 +30,11 @@ import RxSwift
 let disposeBag = DisposeBag()
 let numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
-
-
+Observable.from(numbers)
+    .take(5)
+    .subscribe{print($0)}
+    .disposed(by: disposeBag)
+//처음 5개만 방출, next를 제외한 나머지 이벤트에는 영향을 주지 않음
 
 
 

@@ -30,7 +30,13 @@ import RxSwift
 let disposeBag = DisposeBag()
 let fruits = ["🍏", "🍎", "🍋", "🍓", "🍇"]
 
+//observable이 방출하는 next 이벤트를 필터링하고 completed와 error 이벤트만 구독자로 방출
+//Observable은 elements를 방출하고 있지만 ignoreElemnets연산자가 이를 필터링한다
 
+Observable.from(fruits)
+    .ignoreElements()
+    .subscribe{print($0)}
+    .disposed(by: disposeBag)
 
 
 

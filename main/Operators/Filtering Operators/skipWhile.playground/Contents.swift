@@ -29,3 +29,12 @@ import RxSwift
 
 let disposeBag = DisposeBag()
 let numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+
+Observable.from(numbers)
+    .skipWhile{!$0.isMultiple(of: 2)}
+    //조건을 만들어 이것을 스킵한다(파라미터는 클로져)
+    //근데 skip과 달리 클로져가 false를 리턴한 다음에는 모두 전달
+    .subscribe{print($0)}
+    .disposed(by: disposeBag)
+

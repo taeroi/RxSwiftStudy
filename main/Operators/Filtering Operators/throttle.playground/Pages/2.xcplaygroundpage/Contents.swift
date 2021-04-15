@@ -38,15 +38,16 @@ func currentTimeString() -> String {
    return f.string(from: Date())
 }
 
+//latest를 true로 했을시 지정된 주기를 엄격히 지킨다
+//Observable<Int>.interval(.seconds(1), scheduler: MainScheduler.instance)
+//   .debug()
+//   .take(10)
+//   .throttle(.milliseconds(2500), latest: true, scheduler: MainScheduler.instance)
+//   .subscribe { print(currentTimeString(), $0) }
+//   .disposed(by: disposeBag)
 
-Observable<Int>.interval(.seconds(1), scheduler: MainScheduler.instance)
-   .debug()
-   .take(10)
-   .throttle(.milliseconds(2500), latest: true, scheduler: MainScheduler.instance)
-   .subscribe { print(currentTimeString(), $0) }
-   .disposed(by: disposeBag)
 
-
+//latest를 false로 했을시 지정된 주기를 초과할 수 있다
 Observable<Int>.interval(.seconds(1), scheduler: MainScheduler.instance)
    .debug()
    .take(10)

@@ -30,4 +30,31 @@ import RxSwift
 let disposeBag = DisposeBag()
 let numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
+//원본 Observable에서 첫 번째 요소만 방출하거나 조건에 맞는 요소를 방출함
 
+Observable.just(1)
+    .single()
+    .subscribe{print($0)}
+    .disposed(by: disposeBag)
+//결과: 첫 번째 요소만 전달된다
+
+Observable.from(numbers)
+    .single()
+    .subscribe{print($0)}
+    .disposed(by: disposeBag)
+//결과: sequence에 2개 이상의 요소가 방출되고자 해서 error 발생
+
+//single연산자는 파라미터가 없는 연산자와 predicate를 파라미터로 받는 연산자 이렇게 2가지 종류가 있다
+
+//completed 이벤트가 발생할 때까지 기다리면서 하나의 요소가 방출되는 것을 보장
+Observable.from(numbers)
+    .single{$0 == 3}
+    .subscribe{print($0)}
+    .disposed(by: disposeBag)
+
+let subject = PublishSubject<Int>()
+subject.single()
+    .subscribe{print($0)}
+    .disposed(by: disposeBag)
+
+subject.onNext(100)

@@ -31,4 +31,24 @@ let disposeBag = DisposeBag()
 let numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
 
+let subject = PublishSubject<Int>()
 
+subject.takeLast(2)
+    .subscribe{print($0)}
+    .disposed(by: disposeBag)
+
+numbers.forEach{ subject.onNext($0)}
+//마지막으로 방출한 9,10을 버퍼에 저장하고 있음
+
+//마지막 요소는 10과 11이 됨
+subject.onNext(11)
+
+//Observable에서 completed이벤트를 전달하면 버퍼에 담겨 있던 값이 전달됨
+//subject.onCompleted()
+
+//이렇게 에러가 전달되면 버퍼에 저장되어 있던 값들은 전달되지 않고 error만 전달됨
+enum MyError: Error {
+    case error
+}
+
+subject.onError(MyError.error)

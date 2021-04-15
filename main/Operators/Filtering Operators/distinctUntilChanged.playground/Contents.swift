@@ -30,4 +30,9 @@ import RxSwift
 let disposeBag = DisposeBag()
 let numbers = [1, 1, 3, 2, 2, 3, 1, 5, 5, 7, 7, 7]
 
-
+//동일한 요소가 연속되었다면 여러번 방출되지 않도록 필터링
+//연속적이지 않다면 요소를 방출한다
+Observable.from(numbers)
+    .distinctUntilChanged()
+    .subscribe{print($0)}
+    .disposed(by: disposeBag)

@@ -30,5 +30,9 @@ import RxSwift
 let disposeBag = DisposeBag()
 let numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
-
+//특정 요소를 무시
+Observable.from(numbers)
+    .skip(3)    //정수를 입력하여 처음 3개의 요소를 제외
+    .subscribe{print($0)}
+    .disposed(by: disposeBag)
 

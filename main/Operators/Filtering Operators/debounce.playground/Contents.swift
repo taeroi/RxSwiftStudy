@@ -27,6 +27,11 @@ import RxSwift
  # debounce
  */
 
+// throttle연산자와의 공통점: 짧은 시간동안 반복적으로 방출되는 이벤트를 제외함
+// 동작은 굉장히 다르므로 주의
+
+//파라미터로 타이머와 스케줄러를 받는다
+
 let disposeBag = DisposeBag()
 
 let buttonTap = Observable<String>.create { observer in
@@ -35,13 +40,16 @@ let buttonTap = Observable<String>.create { observer in
          observer.onNext("Tap \(i)")
          Thread.sleep(forTimeInterval: 0.3)
       }
+    //0.3초마다 next이벤트가 전달되고
       
       Thread.sleep(forTimeInterval: 1)
-      
+      //1초 쉬었다가
+    
       for i in 11...20 {
          observer.onNext("Tap \(i)")
          Thread.sleep(forTimeInterval: 0.5)
       }
+    //0.5초마다 next이벤트를 전달한다
       
       observer.onCompleted()
    }
@@ -51,7 +59,10 @@ let buttonTap = Observable<String>.create { observer in
    }
 }
 
-buttonTap   
+//타이머가 만료되기까지 대기한다 이때 전달되는 next이벤트는 전달되지 않는다.
+//1초 쉬는 시간과 타이머가 시간적으로 동일하기 때문에 마지막으로 전달된 10,20이 전달된다
+buttonTap
+    .debounce(.milliseconds(1000), scheduler: MainScheduler.instance)
    .subscribe { print($0) }
    .disposed(by: disposeBag)
 

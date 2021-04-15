@@ -30,3 +30,19 @@ import RxSwift
 let disposeBag = DisposeBag()
 let numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
+//Observable을 파라미터로 받음
+let subject = PublishSubject<Int>()
+let trigger = PublishSubject<Int>()
+
+subject.takeUntil(trigger)
+    .subscribe{print($0)}
+    .disposed(by: disposeBag)
+
+subject.onNext(1)
+subject.onNext(2)
+
+//trigger가 next이벤트를 전달하면 completed이벤트를 전달한다
+trigger.onNext(0)
+
+//이렇게 해도 전달이 되긴하지만 trigger가 실행된 이후에는 방출되지 않는다
+subject.onNext(3)
