@@ -33,6 +33,9 @@ enum MyError: Error {
    case error
 }
 
+//1에서 5까지의 합을 구하는 코드
+//scan연산자 - 주로 작업을 진행하다 중간결과와 최종결과가 필요한 경우에 주로 사용
+
 let o = Observable.range(start: 1, count: 5)
 
 print("== scan")
@@ -41,7 +44,10 @@ o.scan(0, accumulator: +)
    .subscribe { print($0) }
    .disposed(by: bag)
 
+
+//reduce연산자 - 주로 작업을 진행하다 중간결과와 최종결과가 필요한 경우에 주로 사용
 print("== reduce")
 
-
-
+o.reduce(0, accumulator: +)
+    .subscribe{print($0)}
+    .disposed(by: bag)

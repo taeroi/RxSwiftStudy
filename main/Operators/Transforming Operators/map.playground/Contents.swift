@@ -30,5 +30,11 @@ import RxSwift
 let disposeBag = DisposeBag()
 let skills = ["Swift", "SwiftUI", "RxSwift"]
 
+//Observable이 방출하는 항목을 대상으로 함수를 실행하고 그 결과를 Observable한다
 
+Observable.from(skills)
+    .map{"Hello,\($0)"}
+    .subscribe{print($0)}
+    .disposed(by: disposeBag)
 
+//얼마든지 원하는 형식으로 리턴할 수 있음

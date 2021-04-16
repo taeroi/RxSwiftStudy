@@ -36,3 +36,24 @@ enum MyError: Error {
 let trigger = PublishSubject<Void>()
 let data = PublishSubject<String>()
 
+//withLastFrom연산자와 반대 - trigger subject를 전달함
+
+data.sample(trigger)
+    .subscribe{print($0)}
+    .disposed(by: bag)
+
+//아직 data subject로 next이벤트를 전달하지 않았기 때문에 전달되지 않음
+trigger.onNext(())
+
+data.onNext("hello")
+
+//이제 전달됨
+trigger.onNext(())
+
+trigger.onNext(())
+
+//data.onCompleted()
+//trigger.onNext(())
+
+//error이벤트를 방출하면 trigger subject가 next이벤트를 전달하지 않더라도 구독자에게 바로 방출됨
+data.onError(MyError.error)

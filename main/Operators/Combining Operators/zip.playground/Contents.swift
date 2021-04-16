@@ -36,3 +36,29 @@ enum MyError: Error {
 let numbers = PublishSubject<Int>()
 let strings = PublishSubject<String>()
 
+//combineLatest와 비교하면 쉽게 이해될듯, 이 연산자도 공식홈페이지를 참고하기
+
+Observable.zip(numbers,strings){"\($0) - \($1)"}
+    .subscribe{print($0)}
+    .disposed(by: bag)
+
+numbers.onNext(1)
+strings.onNext("one")
+
+//이 next이벤튼는 구독자로 전달되지 않고 않고 대기한다 - 짝이 없기 때문에
+numbers.onNext(2)
+
+// -----
+strings.onNext("two")
+
+
+//error이벤트가 생기면 그 즉시 구독자에게 전달된다
+//numbers.onError(MyError.error)
+
+//completed가 구독자로 전달되면 이후의 요소는 구독자로 전달되지 않는다
+numbers.onCompleted()
+
+numbers.onNext(3)
+strings.onNext("three")
+
+

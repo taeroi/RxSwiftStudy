@@ -29,3 +29,14 @@ import RxSwift
 
 let disposeBag = DisposeBag()
 
+//기본값으로 연산을 시작.
+//원본 observable이 방출하는 항목을 대상으로 변환을 실행, 결과를 방출하는 하나의 observable을 방출
+//따라서 수가 동일하다
+
+//구독자에게 연산된 값을 전달한다
+Observable.range(start: 1, count: 10)
+    .scan(0, accumulator: +)
+    .subscribe{print($0)}
+    .disposed(by: disposeBag)
+
+//중간결과와 최종결과가 필요한 경우에 자주 사용됨

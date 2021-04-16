@@ -31,4 +31,13 @@ let bag = DisposeBag()
 let fruits = Observable.from(["🍏", "🍎", "🥝", "🍑", "🍋", "🍉"])
 let animals = Observable.from(["🐶", "🐱", "🐹", "🐼", "🐯", "🐵"])
 
+//두 개의 observable을 연결할 때 사용한다, 1개의 observable을 리턴
 
+Observable.concat([fruits,animals])
+    .subscribe{print($0)}
+    .disposed(by: bag)
+
+//실행 결과는 동일하다
+fruits.concat(animals)
+    .subscribe{print($0)}
+    .disposed(by: bag)

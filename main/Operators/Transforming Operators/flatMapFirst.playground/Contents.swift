@@ -29,13 +29,16 @@ import RxSwift
 
 let disposeBag = DisposeBag()
 
+//flatmap에서 파생된 연산자(파라미터, 리턴값 동일)
+//flatMapFirst에서는 처음으로 변환된 observable이 전달하는 항목만 구독자로 전달하고 나머지는 무시 -> a가 방출하는 항목들만 구독자로 전달된다
+
 let a = BehaviorSubject(value: 1)
 let b = BehaviorSubject(value: 2)
 
 let subject = PublishSubject<BehaviorSubject<Int>>()
 
 subject
-   .flatMap { $0.asObservable() }
+   .flatMapFirst { $0.asObservable() }
    .subscribe { print($0) }
    .disposed(by: disposeBag)
 

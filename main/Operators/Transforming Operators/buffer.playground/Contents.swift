@@ -29,6 +29,15 @@ import RxSwift
 
 let disposeBag = DisposeBag()
 
+//첫번째 파라미터: 항목을 수집할 시간
+//두번째 파라미터: 수집할 항목의 숫자
+//세번째 파라미터: 스케줄러
+Observable<Int>.interval(.seconds(1), scheduler: MainScheduler.instance)
+    .buffer(timeSpan: .seconds(2),
+            count: 3,
+            scheduler: MainScheduler.instance)
+    .take(5)
+    .subscribe{print($0)}
+    .disposed(by: disposeBag)
 
-
-
+//시간상 오차로 1, 3개가 담겨있는 배열이 방출된다

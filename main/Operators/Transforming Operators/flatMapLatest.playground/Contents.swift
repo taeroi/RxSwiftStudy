@@ -35,7 +35,20 @@ let b = BehaviorSubject(value: 2)
 let subject = PublishSubject<BehaviorSubject<Int>>()
 
 subject
-   .flatMap { $0.asObservable() }
+   .flatMapLatest { $0.asObservable() }
    .subscribe { print($0) }
    .disposed(by: disposeBag)
 
+subject.onNext(a)
+a.onNext(00)
+
+subject.onNext(b)
+b.onNext(11)
+
+a.onNext(22)
+subject.onNext(a)
+
+b.onNext(33)
+
+//마지막으로 전달되는 항목에 대해서만 구독자에게 전달한다
+//원본 Observable이 방출하는 subject의 종류는 BehaviorSubject이다

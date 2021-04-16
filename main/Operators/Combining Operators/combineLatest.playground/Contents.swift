@@ -36,4 +36,24 @@ enum MyError: Error {
 let greetings = PublishSubject<String>()
 let languages = PublishSubject<String>()
 
+//공식 홈페이지의 마블다이어그램을 보며 공부하면 이해가 쉬울것
 
+Observable.combineLatest(greetings,languages){ lhs, rhs -> String in
+    return "\(lhs) \(rhs)"
+}
+.subscribe{print($0)}
+.disposed(by: bag)
+
+
+greetings.onNext("Hello")
+languages.onNext("World!")
+
+greetings.onNext("Hi")
+languages.onNext("SwiftUI!")
+
+greetings.onCompleted()
+languages.onNext("RxSwift")
+
+//이 시점에 구독자에게 completed가 전달됨
+//만약 error가 전달되면 구독자에게 그 즉시 전달된다
+languages.onCompleted()

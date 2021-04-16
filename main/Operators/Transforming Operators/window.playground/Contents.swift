@@ -29,8 +29,20 @@ import RxSwift
 
 let disposeBag = DisposeBag()
 
+//Observable을 방출 - 리턴된 Observable이 무엇을 리턴하고 언제 리턴하는지 이해하는 것이 중요
 
+Observable<Int>.interval(.seconds(1), scheduler: MainScheduler.instance)
+    .window(timeSpan: .seconds(3), count: 3, scheduler: MainScheduler.instance)
+    .take(5)
+    .subscribe{
+        print($0)
+        if let observable = $0.element {
+            observable.subscribe {print("inner: \($0)")}
+        }
+    }
+    .disposed(by: disposeBag)
 
-
-
-
+//결과: 2초마다 한 개씩 방출(inner observable을 적용)
+// 원본 observable은 1초마다 하나씩 방출
+// window연산자는 1초마다 3개씩 수집
+//마찬가지로 시간상 오차가 생긴다

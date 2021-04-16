@@ -30,4 +30,14 @@ import RxSwift
 let bag = DisposeBag()
 let numbers = [1, 2, 3, 4, 5]
 
+// 두 개 이상을 연달아 사용할 수 있음
+//기존의 observable 앞에 값을 추가한다, 'Last in-Frist out'이다
+
+Observable.from(numbers)
+    .startWith(0)
+    .startWith(-3,-2)
+    .startWith(-1)
+    .subscribe{print($0)}
+    .disposed(by:bag)
+
 

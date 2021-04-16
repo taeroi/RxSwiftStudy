@@ -36,4 +36,26 @@ enum MyError: Error {
 let trigger = PublishSubject<Void>()
 let data = PublishSubject<String>()
 
+//호출: Trigger observable
+//파라미터: Data observable
 
+trigger.withLatestFrom(data)
+    .subscribe{print($0)}
+    .disposed(by: bag)
+
+// 아직 trigger subject가 next이벤트를 전달하지 않았기 때문에 data subject의 next이벤트는 전달되지 않는다
+data.onNext("Hello")
+
+trigger.onNext(())
+trigger.onNext(())
+
+//마지막으로 전달된 next이벤트가 구독자에게 전달됨
+data.onCompleted()
+trigger.onNext(())
+
+//더이상 전달되지 않고 구독자에게 바로 전달됨
+data.onError(MyError.error)
+trigger.onNext(())
+
+//직접 구독자에게 전달되고 종료됨
+trigger.onCompleted()
