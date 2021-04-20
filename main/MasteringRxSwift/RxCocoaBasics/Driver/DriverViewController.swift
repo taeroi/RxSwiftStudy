@@ -24,6 +24,10 @@ import UIKit
 import RxSwift
 import RxCocoa
 
+
+//UI 처리에 특화된 observable, Error는 전달하지 않음
+//UI binding을 처리할 때는 driver를 적극적으로 활용하는 것이 코드가 간결해짐
+
 enum ValidationError: Error {
    case notANumber
 }
@@ -40,22 +44,37 @@ class DriverViewController: UIViewController {
    
    override func viewDidLoad() {
       super.viewDidLoad()
+    
+    let result = inputField.rx.text.asDriver()
+        .flatMapLatest{
+            validateText($0)
+                .asDriver(onErrorJustReturn: false)
+        }
       
-      let result = inputField.rx.text
-         .flatMapLatest { validateText($0) }
+    //crash가 나는 상황을 해결
+//      let result = inputField.rx.text
+//        .flatMapLatest {
+//            validateText($0)
+//                .observeOn(MainScheduler.instance)
+//                .catchErrorJustReturn(false) }
+//        .share()
 
       result
          .map { $0 ? "Ok" : "Error" }
-         .bind(to: resultLabel.rx.text)
+        .drive(resultLabel.rx.text)
+        //drive를 사용했을 때는 drive()로
+//         .bind(to: resultLabel.rx.text)
          .disposed(by: bag)
 
       result
          .map { $0 ? UIColor.blue : UIColor.red }
-         .bind(to: resultLabel.rx.backgroundColor)
+        .drive(resultLabel.rx.backgroundColor)
+//         .bind(to: resultLabel.rx.backgroundColor)
          .disposed(by: bag)
 
       result
-         .bind(to: sendButton.rx.isEnabled)
+        .drive(sendButton.rx.isEnabled)
+//         .bind(to: sendButton.rx.isEnabled)
          .disposed(by: bag)
       
    }

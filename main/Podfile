@@ -12,7 +12,8 @@ target 'MasteringRxSwift' do
   # RxSwift Community Projects
   pod 'NSObject+Rx'
   pod 'RxSwiftExt'
-  pod 'Action'
+  pod 'RxCocoa' 
+ pod 'Action'
   pod 'RxDataSources'
   pod "RxGesture"
   pod 'RxReachability'
