@@ -36,8 +36,11 @@ enum MyError: Error {
 let subject = PublishSubject<Int>()
 
 subject
+    .catchErrorJustReturn(-1)
    .subscribe { print($0) }
    .disposed(by: bag)
 
 subject.onError(MyError.error)
 
+// 기본값만 리턴하고 바로 종료.
+//error 발생시 사용할 수 있는 기본값이 있다면 이걸 사용. but 동일한 값이 전달된다

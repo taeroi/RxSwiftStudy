@@ -26,6 +26,7 @@ import RxSwift
 /*:
  # retryWhen
  */
+//사용자가 재시도 버튼을 탭하는 시점에만 재시도하고 싶다면 retryWhen을 사용한다
 
 let bag = DisposeBag()
 
@@ -56,8 +57,13 @@ let source = Observable<Int>.create { observer in
 let trigger = PublishSubject<Void>()
 
 source
+    .retryWhen{_ in trigger}
    .subscribe { print($0) }
    .disposed(by: bag)
 
+//triger subject가 next이벤트를 전달하면 다시 시도
+trigger.onNext(())
 
+//여기서 이제 성공
+trigger.onNext(())
 

@@ -26,6 +26,8 @@ import RxSwift
 /*:
  # retry
  */
+//observable에서 error가 발생하면 구독을 해제하고 새로운 구독을 시작한다
+//새로운 observable을 구독하기 때문에 sequence는 새로 시작함
 
 let bag = DisposeBag()
 
@@ -54,5 +56,10 @@ let source = Observable<Int>.create { observer in
 }
 
 source
+    .retry(7)    //없으면 시작하고 error만 전달하고 종료
    .subscribe { print($0) }
    .disposed(by: bag)
+
+//retry 연산자를 붙힌 후 실행해보면 말그대로 조건이 될 때까지 재시도한다는 의미(최대 재시도 횟수를 만들고 구현해야 무한 루프에 빠지지 않음)
+//최대 재시도 횟수를 만들 때는 +1을 해서 파라미터로 전달해야 우리가 원하는 재시도 값을 얻을 수 있음
+
