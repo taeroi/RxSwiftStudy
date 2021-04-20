@@ -30,7 +30,11 @@ import RxSwift
 let bag = DisposeBag()
 let subject = PublishSubject<Int>()
 
-let source = Observable<Int>.interval(.seconds(1), scheduler: MainScheduler.instance).take(5)
+let source = Observable<Int>.interval(.seconds(1), scheduler: MainScheduler.instance)
+    .take(5)
+    .multicast(subject)
+
+//여러 구독자가 하나의 observable을 구독하게 하는 방법은 다양. 그 중 1개가 multicast
 
 source
    .subscribe { print("🔵", $0) }
@@ -41,7 +45,9 @@ source
    .subscribe { print("🔴", $0) }
    .disposed(by: bag)
 
-
+//구독자가 추가되는 시점에는 시퀀스를 시작하지 않음
+//connect가 시작되는 시점에 시작함
+source.connect()
 
 
 
