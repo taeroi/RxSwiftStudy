@@ -41,8 +41,16 @@ class RxCocoaCollectionViewViewController: UIViewController {
         }
         .disposed(by: bag)
         
+        listCollectionView.rx.modelSelected(UIColor.self)
+            .subscribe(onNext: {color in
+                print(color.rgbHexString)
+            })
+            .disposed(by: bag)
         
-        
+        //이렇게 지정하면 Rxcocoa는 기능하지 않음, so rx.setDelegate(self) 코드로 delegate를 작성
+//        listCollectionView.delegate = self
+        listCollectionView.rx.setDelegate(self)
+            .disposed(by: bag)
     }
 }
 
