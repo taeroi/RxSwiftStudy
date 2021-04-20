@@ -35,7 +35,7 @@ let source = Observable<String>.create { observer in
       if let data = data, let html = String(data: data, encoding: .utf8) {
          observer.onNext(html)
       }
-      
+    
       observer.onCompleted()
    }
    task.resume()
