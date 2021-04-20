@@ -29,4 +29,13 @@ import RxSwift
 
 let bag = DisposeBag()
 
+Observable<Int>.timer(.seconds(1), scheduler: MainScheduler.asyncInstance)
+    .subscribe{print($0)}
+    .disposed(by: bag)
 
+let a = Observable<Int>.timer(.seconds(1),period: .milliseconds(500), scheduler: MainScheduler.asyncInstance)
+    .subscribe{print($0)}
+
+DispatchQueue.main.asyncAfter(deadline: .now()+7){
+    a.dispose()
+}

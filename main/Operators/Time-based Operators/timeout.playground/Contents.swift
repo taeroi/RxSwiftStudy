@@ -31,4 +31,12 @@ let bag = DisposeBag()
 
 let subject = PublishSubject<Int>()
 
+//3초 이내에 다른 next이벤트가 전달되지 않으면 error를 전달하고 끝낸다.
+//time out으로 지정한 시간에 벗어나면 error 전달
+subject.timeout(.seconds(3), scheduler: MainScheduler.asyncInstance)
+    .subscribe{print($0)}
+    .disposed(by: bag)
 
+Observable.timer(.seconds(2), period:  .seconds(5), scheduler: MainScheduler.instance)
+    .subscribe(onNext: {subject.onNext($0)})
+    .disposed(by: bag)

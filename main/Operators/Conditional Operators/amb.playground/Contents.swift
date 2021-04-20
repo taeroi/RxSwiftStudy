@@ -37,4 +37,16 @@ let a = PublishSubject<String>()
 let b = PublishSubject<String>()
 let c = PublishSubject<String>()
 
+// 가장 먼저 next 이벤트를 전달하는 것만 구독자에게 전달됨
 
+a.amb(b)
+    .subscribe{print($0)}
+    .disposed(by: bag)
+
+a.onNext("A")
+b.onNext("B")
+
+a.onCompleted()
+b.onCompleted()
+
+//b에 대한 이벤트는 어떠한 것도 전달되지 않음
