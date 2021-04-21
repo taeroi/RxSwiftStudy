@@ -1,5 +1,5 @@
 # RxSwiftStudy
-KxCoding의 동영상 강의를 보며 RxSwift를 익히는 Repo입니다
+독학으로 익히는 RxSwift예제
 
 1. Hello, Swift 
 2. Key Concepts
