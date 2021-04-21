@@ -31,24 +31,53 @@ class CustomControlPropertyViewController: UIViewController {
    @IBOutlet weak var resetButton: UIBarButtonItem!
    
    @IBOutlet weak var whiteSlider: UISlider!
+    
+    //쓰기만 하는 속성은 binder
+    //읽고 쓰기 하는 속성은 control property
    
    override func viewDidLoad() {
       super.viewDidLoad()
       
-      whiteSlider.rx.value
-         .map { UIColor(white: CGFloat($0), alpha: 1.0) }
-         .bind(to: view.rx.backgroundColor)
-         .disposed(by: bag)
-      
-      resetButton.rx.tap
-         .map { Float(0.5) }
-         .bind(to: whiteSlider.rx.value)
-         .disposed(by: bag)
-      
-      resetButton.rx.tap
-         .map { UIColor(white: 0.5, alpha: 1.0) }
-         .bind(to: view.rx.backgroundColor)
-         .disposed(by: bag)
+//      whiteSlider.rx.value
+//         .map { UIColor(white: CGFloat($0), alpha: 1.0) }
+//         .bind(to: view.rx.backgroundColor)
+//         .disposed(by: bag)
+//
+//      resetButton.rx.tap
+//         .map { Float(0.5) }
+//         .bind(to: whiteSlider.rx.value)
+//         .disposed(by: bag)
+//
+//      resetButton.rx.tap
+//         .map { UIColor(white: 0.5, alpha: 1.0) }
+//         .bind(to: view.rx.backgroundColor)
+//         .disposed(by: bag)
+    
+    //이제 slider에 color속성이 추가되었기 때문에 별도로 binding할 필요가 없음
+    whiteSlider.rx.color
+        .bind(to: view.rx.backgroundColor)
+        .disposed(by: bag)
+    
+    //슬라이더에도 바인딩되고 배경색에도 바인딩 됨
+    resetButton.rx.tap
+        .map{ _ in UIColor(white: 0.5, alpha: 1.0)}
+        .bind(to: whiteSlider.rx.color.asObserver(),
+              view.rx.backgroundColor.asObserver())
+        .disposed(by: bag)
    }
 }
 
+
+extension Reactive where Base: UISlider {
+    var color: ControlProperty<UIColor?> {
+        return base.rx.controlProperty(editingEvents: .valueChanged,
+                                       getter: {(slider) in
+                                        UIColor(white: CGFloat(slider.value), alpha: 1.0)},
+                                       setter: {slider, color in
+                                        var white = CGFloat(1)
+                                        color?.getWhite(&white, alpha: nil)
+                                        slider.value = Float(white)
+                                       }
+        )
+    }
+}
