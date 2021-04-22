@@ -42,6 +42,32 @@ class MemoComposeViewController: UIViewController, ViewModelBindableType {
             .bind(to: viewModel.saveAction.inputs)
             .disposed(by: rx_disposeBag)
         
+        //Keyboard Notification - rx로 구현
+        let willShowObservable = NotificationCenter.default.rx.notification(UIResponder.keyboardWillShowNotification)
+            .map{ ($0.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as?
+                    NSValue)?.cgRectValue.height ?? 0}
+        
+        let willHideObservable = NotificationCenter.default.rx.notification(UIResponder.keyboardWillHideNotification)
+            .map{noti -> CGFloat in 0}
+        
+        let keyboardObservable = Observable.merge(willShowObservable,willHideObservable)
+            .share()
+        
+        keyboardObservable
+            .subscribe(onNext: {[weak self] height in
+                guard let strongSelf = self else {return}
+                
+                var inset = strongSelf.contentTextView.contentInset
+                inset.bottom = height
+                
+                var scrollInset = strongSelf.contentTextView.scrollIndicatorInsets
+                scrollInset.bottom = height
+                
+                UIView.animate(withDuration: 0.3) {
+                    strongSelf.contentTextView.contentInset = inset
+                }
+            })
+            .disposed(by: rx_disposeBag)
     }
     
     override func viewWillAppear(_ animated: Bool) {
