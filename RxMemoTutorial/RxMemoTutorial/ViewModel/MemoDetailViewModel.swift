@@ -11,7 +11,7 @@ import RxCocoa
 import Action
 
 class MemoDetailViewModel: CommonViewModel {
-    let memo: Memo
+    var memo: Memo
     
     private var formatter: DateFormatter = {
         let f = DateFormatter()
@@ -45,6 +45,9 @@ class MemoDetailViewModel: CommonViewModel {
         return Action { input in
             self.storage.update(memo: memo, content: input)
                 .subscribe(onNext: { updated in
+                    
+                    self.memo = updated
+                    
                     self.contents.onNext([
                         updated.content,
                         self.formatter.string(from: updated.insertDate)
@@ -58,7 +61,11 @@ class MemoDetailViewModel: CommonViewModel {
     
     func makeEditAction() -> CocoaAction {
         return CocoaAction{ _ in
-            let composeViewModel = MemoComposeViewModel(title: "Edit", content: self.memo.content, sceneCoordinator: self.sceneCoordinator, storage: self.storage, saveAction: self.performUpdate(memo: self.memo))
+            let composeViewModel = MemoComposeViewModel(title: "Edit",
+                                                        content: self.memo.content,
+                                                        sceneCoordinator: self.sceneCoordinator,
+                                                        storage: self.storage,
+                                                        saveAction: self.performUpdate(memo: self.memo))
             
             let composeScene = Scene.compose(composeViewModel)
             
