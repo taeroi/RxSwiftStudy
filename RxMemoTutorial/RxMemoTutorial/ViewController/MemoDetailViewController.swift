@@ -44,6 +44,14 @@ class MemoDetailViewController: UIViewController, ViewModelBindableType {
                 }
             }
             .disposed(by: rx_disposeBag)
+        
+        //이렇게 구현을 할 수도 있지만 어거지로 한 느낌 -> 동작이 부자연스러움
+        //        var backButton = UIBarButtonItem(title: nil, style: .done, target: nil, action: nil)
+        //        viewModel.title
+        //            .drive(backButton.rx.title)
+        //            .disposed(by: rx_disposeBag)
+        //        backButton.rx.action = viewModel.popAction
+        //        navigationItem.backBarButtonItem = backButton
     }
     
 }

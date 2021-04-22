@@ -58,4 +58,8 @@ class MemoListViewModel: CommonViewModel {
             return self.sceneCoordinator.transition(to: detailScene, using: .push, animated: true).asObservable().map {_ in}
         }
     }()
+    
+//    lazy var popAction = CocoaAction { [unowned self] in
+//        return self.sceneCoordinator.close(animated: true).asObservable().map{_ in}
+//    }
 }

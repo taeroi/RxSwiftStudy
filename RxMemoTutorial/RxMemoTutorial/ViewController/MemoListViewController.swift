@@ -44,5 +44,13 @@ class MemoListViewController: UIViewController, ViewModelBindableType {
             .map {$0.0}
             .bind(to: viewModel.detailAction.inputs)
             .disposed(by: rx_disposeBag)
+        
+        //nav bar의 기본 back button의 동작을 변경한다고 달라지지 않음
+//        var backButton = UIBarButtonItem(title: nil, style: .done, target: nil, action: nil)
+//        viewModel.title
+//            .drive(backButton.rx.title)
+//            .disposed(by: rx_disposeBag)
+//        backButton.rx.action = viewModel.popAction
+//        navigationItem.backBarButtonItem = backButton
     }
 }

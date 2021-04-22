@@ -44,6 +44,8 @@ class SceneCoordinator : SceneCoordinatorType {
                 subject.onError(TransitionError.navigationControllerMissing)
                 break
             }
+            
+            //rx의 기본 라이브러리를 이용하여 구현
             nav.rx.willShow
                 .subscribe(onNext: { [unowned self] evt in
                     self.currentVC = evt.viewController.sceneViewController
