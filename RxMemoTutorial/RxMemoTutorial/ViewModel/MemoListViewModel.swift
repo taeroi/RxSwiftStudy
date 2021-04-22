@@ -8,6 +8,7 @@
 import Foundation
 import RxSwift
 import RxCocoa
+import Action
 
 //View Model에는 두 가지(의존성 주입 생산자, binding에 사용되는 속성과 메서드가 저장
 //CommonViewModel 상속
@@ -15,5 +16,36 @@ class MemoListViewModel: CommonViewModel {
     var memoList: Observable<[Memo]>{
         //이 속성은 메모 리스트를 방출해야함
         return storage.memoList()
+    }
+    
+    //메모를 생성
+    func performUpdate(memo: Memo) -> Action<String,Void> {
+        return Action { input in
+            return self.storage.update(memo: memo, content: input).map { _ in}
+        }
+    }
+    
+    //취소
+    func performCancel(memo: Memo) -> CocoaAction {
+        return Action{
+            return self.storage.delete(memo: memo).map { _ in}
+        }
+    }
+    
+    func makeCreateAction() -> CocoaAction {
+        return CocoaAction{_ in
+            return self.storage.createMemo(content: "")
+                .flatMap{memo -> Observable<Void> in
+                    //여기서 viewModel 만들기
+                    let composeViewModel = MemoComposeViewModel(title: "New",
+                                                                sceneCoordinator: self.sceneCoordinator,
+                                                                storage: self.storage,
+                                                                saveAction: self.performUpdate(memo: memo),
+                                                                cancelAction: self.performCancel(memo: memo))
+                    let composeScene = Scene.compose(composeViewModel)
+                    //map 연산자로 void 형식을 리턴하는 형식으로 바꿔주어야 함
+                    return self.sceneCoordinator.transition(to: composeScene, using: .modal, animated: true).asObservable().map{ _ in}
+                }
+        }
     }
 }
