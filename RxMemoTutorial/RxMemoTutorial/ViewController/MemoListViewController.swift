@@ -45,6 +45,12 @@ class MemoListViewController: UIViewController, ViewModelBindableType {
             .bind(to: viewModel.detailAction.inputs)
             .disposed(by: rx_disposeBag)
         
+        //swipe action을 활성화하고 delete action을 binding
+        //이렇게하면 자동으로 delete가 완성됨
+        listTableView.rx.modelDeleted(Memo.self)
+            .bind(to: viewModel.deleteAction.inputs)
+            .disposed(by: rx_disposeBag)
+        
         //nav bar의 기본 back button의 동작을 변경한다고 달라지지 않음
 //        var backButton = UIBarButtonItem(title: nil, style: .done, target: nil, action: nil)
 //        viewModel.title
