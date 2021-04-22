@@ -71,7 +71,10 @@ class MemoListViewModel: CommonViewModel {
     //메소드로 구현해도 좋지만 이번에는 속성 형태로 구현
     lazy var detailAction: Action<Memo, Void> = {
         return Action { memo in
-            let detailViewModel = MemoDetailViewModel(memo: memo, title: "Detail", sceneCoordinator: self.sceneCoordinator, storage: self.storage)
+            let detailViewModel = MemoDetailViewModel(memo: memo,
+                                                      title: "Detail",
+                                                      sceneCoordinator: self.sceneCoordinator,
+                                                      storage: self.storage)
             let detailScene = Scene.detail(detailViewModel)
             
             return self.sceneCoordinator.transition(to: detailScene, using: .push, animated: true).asObservable().map {_ in}
