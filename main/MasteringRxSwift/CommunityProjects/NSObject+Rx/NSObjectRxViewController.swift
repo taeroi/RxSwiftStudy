@@ -24,6 +24,10 @@ import UIKit
 import RxSwift
 import RxCocoa
 
+import NSObject_Rx
+// NSObject_Rx 라이브러리를 상속하면 DisposeBag을 자동으로 붙여주기 때문에 번거로움이 덜어진다
+
+//ViewController 또한 NSObject를 상속한 것
 class NSObjectRxViewController: UIViewController {
 
    let bag = DisposeBag()
@@ -36,22 +40,23 @@ class NSObjectRxViewController: UIViewController {
 
       Observable.just("Hello")
          .subscribe { print($0) }
-         .disposed(by: bag)
+        .disposed(by: rx.disposeBag)
 
       button.rx.tap
          .map { "Hello" }
          .bind(to: label.rx.text)
-         .disposed(by: bag)
+        .disposed(by: rx.disposeBag)
    }
 }
 
-class MyClass {
-   let bag = DisposeBag()
+// HasDisposeBag protocol은 class에만 채택가능
+class MyClass: HasDisposeBag {
+//   let bag = DisposeBag()
 
    func doSomething() {
       Observable.just("Hello")
       .subscribe { print($0) }
-      .disposed(by: bag)
+      .disposed(by: disposeBag)
    }
 }
 
