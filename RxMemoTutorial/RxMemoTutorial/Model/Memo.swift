@@ -7,7 +7,10 @@
 
 import Foundation
 
-struct Memo: Equatable {
+//tableView와 collectionView에 바인딩하는 속성을 제공
+import RxDataSources
+
+struct Memo: Equatable, IdentifiableType {
     var content: String
     var insertDate: Date
     var identity: String

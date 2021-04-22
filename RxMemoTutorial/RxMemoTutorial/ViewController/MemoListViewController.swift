@@ -30,9 +30,7 @@ class MemoListViewController: UIViewController, ViewModelBindableType {
         
         //메모 목록을 tableview에 바인딩
         viewModel.memoList
-            .bind(to: listTableView.rx.items(cellIdentifier: "cell")) { row, memo, cell in
-                cell.textLabel?.text = memo.content
-            }
+            .bind(to: listTableView.rx.items(dataSource: viewModel.dataSource))
             .disposed(by: rx_disposeBag)
         
         addButton.rx.action = viewModel.makeCreateAction()

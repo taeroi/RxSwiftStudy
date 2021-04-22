@@ -5,16 +5,35 @@
 //  Created by 태로고침 on 2021/04/22.
 //
 
-import Foundation
+import UIKit
 import RxSwift
 import RxCocoa
 import Action
+import RxDataSources
+
+typealias MemoSectionModel =  AnimatableSectionModel<Int, Memo>
 
 //View Model에는 두 가지(의존성 주입 생산자, binding에 사용되는 속성과 메서드가 저장
 //CommonViewModel 상속
 class MemoListViewModel: CommonViewModel {
-    var memoList: Observable<[Memo]>{
-        //이 속성은 메모 리스트를 방출해야함
+    //    var memoList: Observable<[Memo]>{
+    //        //이 속성은 메모 리스트를 방출해야함
+    //        return storage.memoList()
+    //    }
+    
+    let dataSource: RxTableViewSectionedAnimatedDataSource<MemoSectionModel> = {
+        let ds = RxTableViewSectionedAnimatedDataSource<MemoSectionModel>(configureCell: {
+            (dataSource, tableView, indexPath, memo) -> UITableViewCell in
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+            cell.textLabel?.text = memo.content
+            return cell
+        })
+        
+        ds.canEditRowAtIndexPath = {_, _ in return true}
+        return ds
+    }()
+    
+    var memoList: Observable<[MemoSectionModel]>{
         return storage.memoList()
     }
     
@@ -65,7 +84,7 @@ class MemoListViewModel: CommonViewModel {
         }
     }()
     
-//    lazy var popAction = CocoaAction { [unowned self] in
-//        return self.sceneCoordinator.close(animated: true).asObservable().map{_ in}
-//    }
+    //    lazy var popAction = CocoaAction { [unowned self] in
+    //        return self.sceneCoordinator.close(animated: true).asObservable().map{_ in}
+    //    }
 }
