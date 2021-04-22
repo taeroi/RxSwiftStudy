@@ -22,7 +22,6 @@ class MemoComposeViewController: UIViewController, ViewModelBindableType {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
     }
     
     func bindViewModel() {

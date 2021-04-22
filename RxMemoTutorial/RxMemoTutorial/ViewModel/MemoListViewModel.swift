@@ -33,7 +33,7 @@ class MemoListViewModel: CommonViewModel {
     }
     
     func makeCreateAction() -> CocoaAction {
-        return CocoaAction{_ in
+        return CocoaAction{ _ in
             return self.storage.createMemo(content: "")
                 .flatMap{memo -> Observable<Void> in
                     //여기서 viewModel 만들기
