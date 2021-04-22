@@ -38,12 +38,12 @@ class SceneCoordinator : SceneCoordinatorType {
             currentVC = target.sceneViewController
             window.rootViewController = target
             subject.onCompleted()
+            
         case .push:
             guard let nav = currentVC.navigationController else {
                 subject.onError(TransitionError.navigationControllerMissing)
                 break
             }
-            
             nav.rx.willShow
                 .subscribe(onNext: { [unowned self] evt in
                     self.currentVC = evt.viewController.sceneViewController
@@ -54,6 +54,7 @@ class SceneCoordinator : SceneCoordinatorType {
             currentVC = target.sceneViewController
             
             subject.onCompleted()
+            
         case .modal:
             currentVC.present(target, animated: animated) {
                 subject.onCompleted()
