@@ -13,13 +13,12 @@ import NSObject_Rx
 class MemoListViewController: UIViewController, ViewModelBindableType {
     
     var viewModel: MemoListViewModel!
-
+    
     @IBOutlet weak var listTableView: UITableView!
     @IBOutlet weak var addButton: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         
     }
     
@@ -37,6 +36,13 @@ class MemoListViewController: UIViewController, ViewModelBindableType {
             .disposed(by: rx_disposeBag)
         
         addButton.rx.action = viewModel.makeCreateAction()
+        
+        //선택된 메모와 indexPath가 튜플 형태로 방출됨
+        Observable.zip(listTableView.rx.modelSelected(Memo.self), listTableView.rx.itemSelected)
+            .do(onNext: {[unowned self] (_, indexPath) in
+                    self.listTableView.deselectRow(at: indexPath, animated: true)})
+            .map {$0.0}
+            .bind(to: viewModel.detailAction.inputs)
+            .disposed(by: rx_disposeBag)
     }
- 
 }
