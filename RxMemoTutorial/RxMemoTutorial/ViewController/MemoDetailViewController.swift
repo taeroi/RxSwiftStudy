@@ -27,6 +27,7 @@ class MemoDetailViewController: UIViewController, ViewModelBindableType {
             .drive(navigationItem.rx.title)
             .disposed(by: rx_disposeBag)
         
+        //subject가 업데이트된 내용을 다시 방출하게끔 해야함
         viewModel.contents
             .bind(to: listTableView.rx.items){ tableView, row, value in
                 switch row {
@@ -52,6 +53,8 @@ class MemoDetailViewController: UIViewController, ViewModelBindableType {
         //            .disposed(by: rx_disposeBag)
         //        backButton.rx.action = viewModel.popAction
         //        navigationItem.backBarButtonItem = backButton
+        
+        editButton.rx.action = viewModel.makeEditAction()
     }
     
 }
