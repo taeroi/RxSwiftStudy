@@ -3,4 +3,70 @@
    uuid = "6965BF62-93A0-4D39-AFA6-8F9D444E7C7D"
    type = "0"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "CE132221-37B8-49EB-9109-6964F4A774B0"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MasteringRxSwift/Networking/URLSession/RxCocoaURLSessionViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "65"
+            endingLineNumber = "65"
+            landmarkName = "fetchBookList()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "CE132221-37B8-49EB-9109-6964F4A774B0 - eed480a097d2bec0"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MasteringRxSwift.RxCocoaURLSessionViewController.fetchBookList() -&gt; ()"
+                  moduleName = "MasteringRxSwift"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/parktaehwan/RxSwiftStudy/main/MasteringRxSwift/Networking/URLSession/RxCocoaURLSessionViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "65"
+                  endingLineNumber = "65"
+                  offsetFromSymbolStart = "166">
+               </Location>
+               <Location
+                  uuid = "CE132221-37B8-49EB-9109-6964F4A774B0 - b504e5caaba75bc4"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.String) -&gt; Foundation.URL in MasteringRxSwift.RxCocoaURLSessionViewController.fetchBookList() -&gt; ()"
+                  moduleName = "MasteringRxSwift"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/parktaehwan/RxSwiftStudy/main/MasteringRxSwift/Networking/URLSession/RxCocoaURLSessionViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "65"
+                  endingLineNumber = "65"
+                  offsetFromSymbolStart = "83">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A190387D-44EA-4876-9E60-A83B7A96DA0C"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MasteringRxSwift/Networking/URLSession/RxCocoaURLSessionViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "69"
+            endingLineNumber = "69"
+            landmarkName = "fetchBookList()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>
