@@ -127,14 +127,14 @@ class RxCocoaURLSessionViewController: UIViewController {
 //        }
 //        .asDriver(onErrorJustReturn: [])
 //
-//        response
-//            .drive(list)
-//            .disposed(by: rx.disposeBag)
-//
-//        response
-//            .map{ _ in false }
-//            .startWith(true)
-//            .drive(UIApplication.shared.rx.isNetworkActivityIndicatorVisible)
-//            .disposed(by: rx.disposeBag)
+        response
+            .drive(list)
+            .disposed(by: rx.disposeBag)
+
+        response
+            .map{ _ in false }
+            .startWith(true)
+            .drive(UIApplication.shared.rx.isNetworkActivityIndicatorVisible)
+            .disposed(by: rx.disposeBag)
     }
 }

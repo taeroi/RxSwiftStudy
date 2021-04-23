@@ -32,11 +32,17 @@ let apple = "🍏"
 let orange = "🍊"
 let kiwi = "🥝"
 
+let friuts = [apple,orange,kiwi]
+
 // 두 개 이상의 요소를 방출하려고 할 때 just로는 불가능하다. 이때, of연산자를 사용한다
 
 Observable.of(apple, orange, kiwi)
    .subscribe { element in print(element) }
    .disposed(by: disposeBag)
+
+Observable.of(friuts)
+    .subscribe { element in print(element) }
+    .disposed(by: disposeBag)
 
 // 배열 요소를 하나씩 방출하고 싶다면? of연산자로는 안된다. 다음 페이지의 from연산자를 사용
 Observable.of([1, 2], [3, 4], [5, 6])

@@ -30,7 +30,7 @@ import RxSwift
 let disposeBag = DisposeBag()
 let fruits = ["🍏", "🍎", "🍋", "🍓", "🍇"]
 
-//제한적으로 방출
+//특정요소에 위치한 elements를 제한적으로 방출
 //결과적으로 구독자에게는 index 값에 해당하는 1개만 구독자에게로 전달된다
 Observable.from(fruits)
     .elementAt(2)   //index

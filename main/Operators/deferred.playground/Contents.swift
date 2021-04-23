@@ -30,11 +30,12 @@ import RxSwift
 let disposeBag = DisposeBag()
 let animals = ["🐶", "🐱", "🐹", "🐰", "🦊", "🐻", "🐯"]
 let fruits = ["🍎", "🍐", "🍋", "🍇", "🍈", "🍓", "🍑"]
-var flag = true
+var flag = false
 
 // 특정 조건에 따라 Observable을 생성할 수 있음
 
 let factory = Observable<String>.deferred{ //타입지정이 필요함
+    flag.toggle()
     
     if flag {
         return Observable.from(animals)

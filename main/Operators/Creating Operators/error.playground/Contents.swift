@@ -30,7 +30,7 @@ import RxSwift
 let disposeBag = DisposeBag()
 
 enum MyError: Error {
-   case error
+    case error
 }
 
 //error 이벤트를 전달하고 종료하는 observable을 생성

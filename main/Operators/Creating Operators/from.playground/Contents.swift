@@ -33,5 +33,11 @@ let fruits = ["🍏", "🍎", "🍋", "🍓", "🍇"]
 Observable.from(fruits)
    .subscribe { element in print(element) }
    .disposed(by: disposeBag)
+//배열에 저장된 elements가 순서대로 방출됨
 
 
+//MARK: of연산자와 차이점
+Observable.of(fruits)
+    .subscribe { element in print(element) }
+    .disposed(by: disposeBag)
+//배열에 저장된 elements가 한 번에 방출됨

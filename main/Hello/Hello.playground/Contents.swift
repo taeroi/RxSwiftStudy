@@ -23,12 +23,21 @@
 import UIKit
 import RxSwift
 
+
+//Observable, Subject, Drive 개념 중요
+//함수 지향 프로그래밍, 프로토콜 지향 프로그래밍의 개념 중요
+//Reactive 언어를 Swift로 구현한 것이다.
+//github Rx에 있는 내용을 잘 보고 이해하며 스터디
+//전통적인 delegate 패턴을 사용하지 않고 사용할 수 있음
+//가장 큰 장점은 Rx를 사용하면 직관적이고 단순한 코드로 구현할 수 있다는 것
+
 let disposeBag = DisposeBag()
 
 Observable.just("Hello, RxSwift")
     .subscribe { print($0)}
     .disposed(by: disposeBag)
 
+//a,b를 바꾼다고 a+b가 바뀌지 않는다, 반응형으로 프로그래밍 할 수는 있지만 코드가 복잡해진다
 //var a = 1
 //var b = 2
 //a+b

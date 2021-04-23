@@ -26,6 +26,8 @@ import RxSwift
 /*:
  # Operators
  */
+//대부분의 operator은 observable상에서 동작하고 observable을 리턴하기 때문에 두 개 이상의 연산자를 사용할 수 있음
+//so, 필요에 따라서 얼마든지 실행할 수 있지만 순서에 따라 원하는 동작이 달라질 수 있으니 주의해야함
 
 let bag = DisposeBag()
 

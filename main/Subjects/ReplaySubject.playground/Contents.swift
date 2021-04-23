@@ -27,6 +27,7 @@ import RxSwift
 /*:
  # ReplaySubject
  */
+//두 개 이상의 event를 저장해두고 새로운 구독자에게 전달하고자 할 때 사용
 
 let disposeBag = DisposeBag()
 
@@ -34,14 +35,14 @@ enum MyError: Error {
    case error
 }
 
-//이전 Subjects와는 다르게 create로 생성한다 (버퍼사이즈 생성)
+//이전 Subjects와는 다르게 create메서드로 생성한다 (버퍼사이즈 생성 - 3개의 이벤트를 전달할 수 있는 저장소)
 let rs = ReplaySubject<Int>.create(bufferSize: 3)
 
 (1...10).forEach {rs.onNext($0)}
 
 rs.subscribe {print("Observer 1>>", $0)}
     .disposed(by: disposeBag)
-// 출력결과는 버퍼에 마지막에 전달된 3개가 저장되므로 next 이벤트에는 8,9,10이 저장됨
+//버퍼에 마지막에 전달된 3개가 저장되므로 next 이벤트에는 8,9,10이 저장되고 observer로 전달
 
 rs.subscribe {print("Observer 2>>",$0)}
     .disposed(by: disposeBag)
@@ -51,11 +52,11 @@ rs.onNext(11)
 //새로운 구독자 생성
 rs.subscribe {print("Observer 3>>",$0)}
     .disposed(by: disposeBag)
-// 출력결과는 next 이벤트로 받은것 + 버퍼에 마지막에 전달된 것
+// 출력결과는 next 이벤트로 받은것 + 버퍼에 마지막에 전달된 것 -> 따라서 9,10,11이 버퍼에 저장되고 전달됨
 
-// completed,error 이벤트는 새로운 구독자의 이벤트 실행 후 종료됨
+// completed,error는 모든 구독자에게 전달되고 새로운 구독자의 이벤트 실행 후 종료됨
 rs.onCompleted()
 
-
+//버퍼에 저장되어 있는 이벤트를 전달하고 종료
 rs.subscribe {print("Observer 4>>",$0)}
     .disposed(by: disposeBag)

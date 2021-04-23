@@ -35,8 +35,8 @@ enum MyError: Error {
 }
 
 //이벤트를 전달하는 시점에서 차이가 있음
-//subject로 completed 이벤트가 전달되기 전까지 구독자로 전달하지 않는다
-//completed 이벤트가 전달되면 최근의 이벤트를 구독자로 전달한다
+//subject로 completed가 전달되기 전까지 구독자로 전달하지 않는다
+//completed 이벤트가 전달되면 그전까지 전달된 가장 최근의 next이벤트를 구독자로 전달한다
 
 let subject = AsyncSubject<Int>()
 subject
@@ -50,8 +50,8 @@ subject.onNext(2)
 subject.onNext(3)
 //마찬가지로 아직 completed 이벤트가 전달되지 않았으므로 구독자에게 이벤트가 전달되지 않는다
 
-//subject.onCompleted()
-//completed 이벤트가 실행된 시점을 기준으로 마지막 next이벤트를 전달하고 종료된다
+subject.onCompleted()
+//completed 이벤트가 실행된 시점을 기준으로 마지막 next이벤트(3)만 전달하고 종료된다
 
-subject.onError(MyError.error)
-// error 이벤트가 전달되면 아무 이벤트도 구독자로 전달하지 않고 종료된다
+//subject.onError(MyError.error)
+// error 이벤트가 전달되면 아무 이벤트도 구독자로 전달하지 않고 종료

@@ -36,9 +36,11 @@ enum MyError: Error {
 // 앞서 공부한 연산자는 parameters를 방출하고 completed가 전달되면 중지됨
 // Observable이 동작하는 방식을 직접 구현하고자 할 때는 create연산자를 사용하면 됨
 
+//Observer를 파라미터로 받아서 Disposable을 리턴
 Observable<String>.create{ (observer) -> Disposable in
     guard let url = URL(string:"https://www.apple.com")
     else {
+        //observer는 파라미터로 전달된 클로져
         observer.onError(MyError.error)
         return Disposables.create()
         //여기서 Disposable이 아닌 Disposables로 사용해야 함을 꼭 기억
@@ -49,14 +51,20 @@ Observable<String>.create{ (observer) -> Disposable in
         observer.onError(MyError.error)
         return Disposables.create()
     }
+    //실행되면 문자열이 정상적으로 저장된 것이고 문자열을 방출하는 것
+    
     //요소를 방출할 때는 onNext 메소드를 사용하고 파라미터로 방출할 요소를 선택
     observer.onNext(html)
     
     //종료시키기 위해서는 completed나 error 이벤트를 호출해야한다
-    //so, onNext를 통해 파라미터를 구독자에게 전달하고자 할 때는 completd나 error 이벤트가 발생하기 전에 호출해야 한다
+    //so, onNext를 통해 파라미터를 구독자에게 전달하고자 할 때는 completd나 error를 전달하기 전에 호출해야 한다
     observer.onCompleted()
     
+    //completed가 전달된 이후에는 next이벤트가 전달되지 않음
+    observer.onNext("After Completed")
+    
     return Disposables.create()
+    //모든 리소스가 정리되고 Observable이 정상적으로 종료됨
 }
 .subscribe{print($0)}
 .disposed(by: disposeBag)

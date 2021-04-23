@@ -30,12 +30,12 @@ import RxSwift
 let disposeBag = DisposeBag()
 
 //empty, error 연산자 모두 어떠한 요소도 방출하지 않음(next 이벤트를 전달하지 않는다)
-
+//elements를 방출하지 않기 때문에 보통 Void로 선언
 Observable<Void>.empty()
     .subscribe{print($0)}
     .disposed(by: disposeBag)
 
-//결과를 보면 completed만 출력됨
+//결과를 보면 completed만 출력됨, observer가 아무런 동작없이 종료해야 할 때 주로 사용됨
 
 
 
