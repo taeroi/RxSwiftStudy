@@ -40,7 +40,7 @@ let buttonTap = Observable<String>.create { observer in
          observer.onNext("Tap \(i)")
          Thread.sleep(forTimeInterval: 0.3)
       }
-    //0.3초마다 next이벤트가 전달되고
+    //0.3초마다 next이벤트가 10번 전달되고
       
       Thread.sleep(forTimeInterval: 1)
       //1초 쉬었다가
@@ -49,7 +49,7 @@ let buttonTap = Observable<String>.create { observer in
          observer.onNext("Tap \(i)")
          Thread.sleep(forTimeInterval: 0.5)
       }
-    //0.5초마다 next이벤트를 전달한다
+    //0.5초마다 next이벤트를 10번 전달한다
       
       observer.onCompleted()
    }
