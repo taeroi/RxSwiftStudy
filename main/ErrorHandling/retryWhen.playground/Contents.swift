@@ -56,6 +56,7 @@ let source = Observable<Int>.create { observer in
 
 let trigger = PublishSubject<Void>()
 
+// 바로 error를 전달하지 않고 trigger Observable이 리턴할 때까지 대기
 source
     .retryWhen{_ in trigger}
    .subscribe { print($0) }
