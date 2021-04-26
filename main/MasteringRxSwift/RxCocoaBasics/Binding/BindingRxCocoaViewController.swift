@@ -44,7 +44,7 @@ class BindingRxCocoaViewController: UIViewController {
         valueField.becomeFirstResponder()
         
 //        valueField.rx.text
-////            .observeOn(MainScheduler.instance)
+//            .observeOn(MainScheduler.instance)
 //            .subscribe(onNext: {[weak self] str  in
 //                DispatchQueue.main.async {  //UI component이기 때문에 main thread에서 실행되기 때문에 background thread로 실행되는 것에 대해 문제가 생길 수도 있음 -> 1.gcd로 해결 2.observeOn으로 해결
 //                self?.valueLabel.text = str
