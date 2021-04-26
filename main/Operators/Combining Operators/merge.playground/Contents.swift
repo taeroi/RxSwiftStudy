@@ -41,7 +41,7 @@ let negativeNumbers = BehaviorSubject(value: -1)
 //여러 observable을 합치고 방출하는 요소를 순서대로 방출하는 observable을 리턴한다
 //하나의 observable로 합치고 순서대로 구독자에게 전달된다
 
-let source = Observable.of(oddNumbers,evenNumbers)
+let source = Observable.of(oddNumbers,evenNumbers,negativeNumbers)
 
 source
     //기본적으로 merge메서드는 제한이 없다, 제한이 있게 하고 싶어할땐 maxConcurrent를 파라미터로 사용하면 된다
@@ -52,8 +52,14 @@ source
 oddNumbers.onNext(3)
 evenNumbers.onNext(4)
 
+evenNumbers.onNext(6)
+oddNumbers.onNext(5)
+
 //completed를 구독자에게 전달하면 next이벤트를 더이상 받지 못하고 모든 요소를 구독자에게 전달한다
 //error가 전달되면 즉시 구독자에게 전달됨
 oddNumbers.onCompleted()
 
+oddNumbers.onNext(7)
+evenNumbers.onNext(8)
 
+negativeNumbers.onNext(-3)

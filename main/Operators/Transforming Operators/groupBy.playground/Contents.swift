@@ -32,15 +32,15 @@ let words = ["Apple", "Banana", "Orange", "Book", "City", "Axe"]
 
 // observable이 방출하는 요소를 원하는 기준으로 그룹핑할때 사용
 
-Observable.from(words)
-    .groupBy{$0.count}
-    .subscribe(onNext: {groupedObservable in
-        print("== \(groupedObservable.key) ==")
-                groupedObservable.subscribe{
-                    print("  \($0)  ")
-                }
-    })
-    .disposed(by: disposeBag)
+//Observable.from(words)
+//    .groupBy{$0.count}
+//    .subscribe(onNext: {groupedObservable in
+//        print("== \(groupedObservable.key) ==")
+//                groupedObservable.subscribe{
+//                    print("  \($0)  ")
+//                }
+//    })
+//    .disposed(by: disposeBag)
 
 //key가 저장된 Observable이 방출됨
 //문자열의 길이를 기준으로 했을 때 4개의 그룹으로 형성된다
@@ -54,10 +54,8 @@ Observable.from(words)
 
 Observable.range(start: 1, count: 10)
     .groupBy{$0.isMultiple(of: 2)}
-    .subscribe(onNext: {groupedObservable in
-        print("== \(groupedObservable.key) ==")
-                groupedObservable.subscribe{
-                    print($0)
-                }
-    } )
+    .flatMap{$0.toArray() }
+    .subscribe{ groupedObservable in
+        print(groupedObservable.event)
+    }
     

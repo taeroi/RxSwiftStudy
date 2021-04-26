@@ -49,11 +49,12 @@ data.onNext("hello")
 
 //이제 전달됨
 trigger.onNext(())
+trigger.onNext(())
 
 trigger.onNext(())
 
-//data.onCompleted()
-//trigger.onNext(())
+data.onCompleted()
+trigger.onNext(())
 
 //error이벤트를 방출하면 trigger subject가 next이벤트를 전달하지 않더라도 구독자에게 바로 방출됨
 data.onError(MyError.error)

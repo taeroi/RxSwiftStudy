@@ -39,7 +39,8 @@ let c = PublishSubject<String>()
 
 // 가장 먼저 next 이벤트를 전달하는 것만 구독자에게 전달됨
 
-a.amb(b)
+//a.amb(b)
+Observable.amb([a,b,c])
     .subscribe{print($0)}
     .disposed(by: bag)
 

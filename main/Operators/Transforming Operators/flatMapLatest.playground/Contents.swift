@@ -40,15 +40,15 @@ subject
    .disposed(by: disposeBag)
 
 subject.onNext(a)
-a.onNext(00)
+a.onNext(11)
 
 subject.onNext(b)
-b.onNext(11)
+b.onNext(22)
 
-a.onNext(22)
+a.onNext(33)
 subject.onNext(a)
 
-b.onNext(33)
+b.onNext(44)
 
 //마지막으로 전달되는 항목에 대해서만 구독자에게 전달한다
 //원본 Observable이 방출하는 subject의 종류는 BehaviorSubject이다

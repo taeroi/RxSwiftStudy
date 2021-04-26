@@ -33,8 +33,8 @@ enum MyError: Error {
    case error
 }
 
-let greetings = PublishSubject<String>()
-let languages = PublishSubject<String>()
+let greetings = BehaviorSubject<String>(value: "")
+let languages = BehaviorSubject<String>(value: "")
 
 //공식 홈페이지의 마블다이어그램을 보며 공부하면 이해가 쉬울것
 
