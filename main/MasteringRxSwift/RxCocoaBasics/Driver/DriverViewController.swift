@@ -48,6 +48,7 @@ class DriverViewController: UIViewController {
     let result = inputField.rx.text.asDriver()
         .flatMapLatest{
             validateText($0)
+                //error가 전달되는 시점에 사용될 기본값이나 recovery Observable을 사용할 수 있음
                 .asDriver(onErrorJustReturn: false)
         }
       
@@ -62,7 +63,7 @@ class DriverViewController: UIViewController {
       result
          .map { $0 ? "Ok" : "Error" }
         .drive(resultLabel.rx.text)
-        //drive를 사용했을 때는 drive()로
+        //driver를 사용했을 때는 bind메소드 대신 drive메소드를 사용
 //         .bind(to: resultLabel.rx.text)
          .disposed(by: bag)
 

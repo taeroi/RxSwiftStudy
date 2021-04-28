@@ -68,5 +68,68 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "8499E786-77C2-4661-BE27-BAF71B25A668"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MasteringRxSwift/RxCocoaCommonPatterns/CollectionView/CocoaTouchCollectionViewViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "27"
+            endingLineNumber = "27"
+            landmarkName = "CocoaTouchCollectionViewViewController"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  uuid = "8499E786-77C2-4661-BE27-BAF71B25A668 - 34c45330af6c466f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MasteringRxSwift.CocoaTouchCollectionViewViewController.list.getter : Swift.Array&lt;__C.UIColor&gt;"
+                  moduleName = "MasteringRxSwift"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/parktaehwan/RxSwiftStudy/main/MasteringRxSwift/RxCocoaCommonPatterns/CollectionView/CocoaTouchCollectionViewViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "27"
+                  endingLineNumber = "27"
+                  offsetFromSymbolStart = "52">
+               </Location>
+               <Location
+                  uuid = "8499E786-77C2-4661-BE27-BAF71B25A668 - b2cb6a1bb4f1c274"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MasteringRxSwift.CocoaTouchCollectionViewViewController.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; MasteringRxSwift.CocoaTouchCollectionViewViewController"
+                  moduleName = "MasteringRxSwift"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/parktaehwan/RxSwiftStudy/main/MasteringRxSwift/RxCocoaCommonPatterns/CollectionView/CocoaTouchCollectionViewViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "27"
+                  endingLineNumber = "27"
+                  offsetFromSymbolStart = "146">
+               </Location>
+               <Location
+                  uuid = "8499E786-77C2-4661-BE27-BAF71B25A668 - 2d32d338beb423fc"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MasteringRxSwift.CocoaTouchCollectionViewViewController.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;MasteringRxSwift.CocoaTouchCollectionViewViewController&gt;"
+                  moduleName = "MasteringRxSwift"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/parktaehwan/RxSwiftStudy/main/MasteringRxSwift/RxCocoaCommonPatterns/CollectionView/CocoaTouchCollectionViewViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "27"
+                  endingLineNumber = "27"
+                  offsetFromSymbolStart = "102">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

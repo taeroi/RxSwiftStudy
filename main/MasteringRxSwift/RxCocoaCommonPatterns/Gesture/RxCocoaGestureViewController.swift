@@ -48,7 +48,5 @@ class RxCocoaGestureViewController: UIViewController {
                 gesture.setTranslation(.zero, in: self.view)
             })
             .disposed(by: bag)
-        
-        
     }
 }
